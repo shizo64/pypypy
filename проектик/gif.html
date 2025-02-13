@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>яляляля</title>
+    <link rel="stylesheet" href="gif.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        
+            <img class="gifCat" src="gif/myaowl-heart.gif">
+            <P class="text">Твоя улыбка, твои шутки, твои подколы — всё это делает меня счастливее! 😊💖</P>
+            <P class="text">Устроим марафон дорам?</P>
+        <div>
+            <div> <!-- Кнопка открытия -->
+                <label class="open-btn" for="modal-toggle" button onclick="startVideo('videoMem1')">
+                        ДА
+                </label>
+        
+                <!-- Чекбокс для управления состоянием окна -->
+                <input type="checkbox" id="modal-toggle">
+        
+                <!-- Модальное окно -->
+                <div class="modal-overlay">
+                    <div class="modal-content">
+                        <!-- Кнопка закрытия -->
+                        <label class="close-btn" for="modal-toggle" button onclick="stopVideo('videoMem1'), resumeMusic()">&#x1f394;</label>
+
+                        <div class="video-wrapper">
+                        
+                            <video poster="gif/dobrikot.jpg" preload="none" controls loop width="400" height="400" id="videoMem1" class="videoMem" src="gif/yra.mp4"></video>
+
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div>
+                <label class="open-btn-n content" for="modal-toggle-n">
+                    НЕТ
+                </label>
+
+                    <input type="checkbox" id="modal-toggle-n">
+            
+                    <!-- Модальное окно -->
+                <div class="modal-overlay">
+                    <div class="modal-content">
+                            <!-- Кнопка закрытия -->
+                        <label class="close-btn" for="modal-toggle-n" button onclick="stopVideo('videoMem2'), resumeMusic()">&#x1f394;</label>
+
+                        <div class="video-wrapper">
+                            
+                            <video poster="gif/sadKOtik.jpg" preload="none" controls loop width="800" height="800" id="videoMem2" class="videoMem-n" src="gif/net.mp4"></video>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+           
+            function stopVideo(videoId) {
+                const video = document.getElementById(videoId); // Находим видео по ID
+                if (video) {
+                    video.pause(); // Останавливаем видео
+                    video.currentTime = 0; // Перематываем в начало
+                } else {
+                    console.error("Элемент видео не найден!");
+                }
+            }
+        </script>
+
+    </div>
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="musik/loveForYou.mp3" type="audio/mpeg">
+        
+    </audio> 
+    <script>
+        // Элементы аудио и видео
+        const audio = document.getElementById("backgroundMusic");
+        const modalToggles = document.querySelectorAll('input[type="checkbox"]');
+
+        // Обработчик события при открытии модального окна
+        modalToggles.forEach((toggle) => {
+            toggle.addEventListener("change", () => {
+                if (toggle.checked) {
+                    pauseMusic(); // Ставим музыку на паузу
+                    const videoId = toggle.id.replace("modal-toggle-", "videoMem-");
+                    const video = document.getElementById(videoId);
+                    video.play(); // Запускаем видео
+                }
+            });
+        });
+
+        // Функция для паузы музыки
+        function pauseMusic() {
+            audio.pause();
+        }
+
+        // Функция для возобновления музыки
+        function resumeMusic() {
+            audio.play();
+        }
+
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.volume = 0.1;
+
+    </script>
+    <video id="backgroundVideo" autoplay muted loop playsinline>
+        <source src="gif/back_2.mp4" type="video/mp4">
+
+    </video>
+</body>
+</html>
